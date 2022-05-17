@@ -47,4 +47,27 @@ public class BoardService {
 		return cnt == 1;
 	}
 
+	public int searchCountBoard(String title) {
+		if(title == null) {
+			title = "";
+		}
+		
+		title.trim();
+		title = "%" + title + "%";
+		
+		return boardMapper.selectSearchCountBoard(title);
+	}
+
+	public List<BoardDto> searchListBoard(int page, int rowPerPage, String title) {
+		if(title == null) {
+			title = "";
+		}
+		
+		title.trim();
+		title = "%" + title + "%";
+		int from = (page - 1) * rowPerPage;
+		
+		return boardMapper.searchAllBoard(from, rowPerPage, title);
+	}
+
 }

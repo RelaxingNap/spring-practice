@@ -1,6 +1,7 @@
 package com.academy.spr.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,25 @@ public class ReplyService {
 		
 		int cnt = replyMapper.insertReply(reply);
 		return cnt == 1;
+	}
+
+	public List<ReplyDto> listReply(int boardId) {
+		
+		return replyMapper.selectAllReply(boardId);
+	}
+
+	public boolean modifyReply(ReplyDto reply) {
+		int cnt = replyMapper.updateReply(reply);
+		return cnt == 1;
+	}
+
+	public boolean removeReply(ReplyDto reply) {
+		int cnt = replyMapper.deleteReply(reply);
+		return cnt == 1;
+	}
+
+	public void removeAllReply(int boardId) {
+		replyMapper.deleteAllReply(boardId);	
 	}
 
 }

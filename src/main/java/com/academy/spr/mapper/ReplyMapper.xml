@@ -8,4 +8,27 @@
 		VALUES (#{boardId}, #{content}, #{inserted})
 	</insert>
 	
+	<select id="selectAllReply" resultType="com.academy.spr.domain.ReplyDto">
+		SELECT id, board_id boardId, content, inserted
+		FROM Reply
+		WHERE board_id = #{boardId}
+		ORDER BY id
+	</select>
+	
+	<update id="updateReply">
+		UPDATE Reply
+		SET content = #{content}
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="deleteReply">
+		DELETE FROM Reply
+		WHERE id = #{id}
+	</delete>
+	
+	<delete id="deleteAllReply">
+		DELETE FROM Reply
+		WHERE board_id = #{boardId}
+	</delete>
+	
 </mapper>

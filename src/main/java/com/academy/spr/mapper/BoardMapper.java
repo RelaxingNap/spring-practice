@@ -20,4 +20,8 @@ public interface BoardMapper {
 
 	int deleteBoard(int id);
 
+	int selectSearchCountBoard(String title);
+
+	List<BoardDto> searchAllBoard(@Param("from")int from, @Param("rowPerPage")int rowPerPage, @Param("title")String title);
+
 }

@@ -39,4 +39,19 @@
 		WHERE id = #{id}
 	</delete>
 	
+	<select id="selectSearchCountBoard" resultType="int">
+		SELECT Count(b.id)
+		FROM Board b
+		WHERE b.title LIKE #{title}
+	</select>
+	
+	<select id="searchAllBoard" resultType="com.academy.spr.domain.BoardDto">
+		SELECT b.id, b.title, b.inserted, COUNT(r.id) replyNum
+		FROM Board b LEFT JOIN Reply r ON b.id = r.board_id
+		WHERE b.title LIKE #{title} 
+		GROUP BY b.id
+		ORDER BY 1 DESC
+		LIMIT #{from}, #{rowPerPage}
+	</select>
+	
 </mapper>

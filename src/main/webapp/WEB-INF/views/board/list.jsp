@@ -40,6 +40,17 @@
 
 		</tbody>
 	</table>
+	
+	<nav class="navbar navbar-light bg-light">
+		<div class="container-fluid justify-content-center">
+			<form class="d-flex" action="${appRoot }/board/search">
+				<input class="form-control me-2" type="search" name="title" placeholder="Search"
+					aria-label="Search">
+				<button class="btn btn-outline-success" type="submit">Search</button>
+			</form>
+		</div>
+	</nav>
+
 	<sub:Pagenav pagePath="list"/>
 	
 </body>
