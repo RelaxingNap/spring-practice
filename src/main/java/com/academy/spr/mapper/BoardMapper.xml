@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.academy.spr.mapper.BoardMapper"> 
+	<select id="selectAllBoard" resultType="com.academy.spr.domain.BoardDto">
+		SELECT b.id, b.title, b.inserted, COUNT(r.id) replyNum
+		FROM Board b LEFT JOIN Reply r ON b.id = r.board_id
+		GROUP BY b.id
+		ORDER BY 1 DESC
+		LIMIT #{from}, #{rowPerPage}
+	</select>
+	
+	<select id="countBoard" resultType="int">
+		SELECT Count(b.id)
+		FROM Board b
+	</select>
+	
+	<insert id="insertBoard" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
+		INSERT INTO Board (title, body, inserted)
+		VALUES (#{title}, #{content}, #{inserted})
+	</insert>
+	
+	<select id="selectBoard" resultType="com.academy.spr.domain.BoardDto">
+		SELECT id, title, body content, inserted
+		FROM Board 
+		WHERE id = #{id}
+	</select>
+	
+	<update id="updateBoard">
+		UPDATE Board
+		SET title = #{title},
+			body = #{content}
+		WHERE id = #{id}
+	</update>
+	
+	<delete id="deleteBoard">
+		DELETE FROM Board
+		WHERE id = #{id}
+	</delete>
+	
+</mapper>
