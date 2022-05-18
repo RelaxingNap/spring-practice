@@ -7,11 +7,7 @@ import org.apache.ibatis.annotations.Param;
 import com.academy.spr.domain.BoardDto;
 
 public interface BoardMapper {
-
-	List<BoardDto> selectAllBoard(@Param("from")int from, @Param("rowPerPage")int rowPerPage);
-
-	int countBoard();
-
+	
 	int insertBoard(BoardDto board);
 
 	BoardDto selectBoard(int id);
@@ -20,8 +16,9 @@ public interface BoardMapper {
 
 	int deleteBoard(int id);
 
-	int selectSearchCountBoard(String title);
+	int selectSearchCountBoard(String title); // 검색어 있는경우와 없는경우 상관없이 적용
 
-	List<BoardDto> searchAllBoard(@Param("from")int from, @Param("rowPerPage")int rowPerPage, @Param("title")String title);
-
+	List<BoardDto> selectSearchAllBoard(@Param("from")int from, 
+			@Param("rowPerPage")int rowPerPage, 
+			@Param("title")String title); // 검색어 있는경우와 없는경우 상관없이 적용
 }

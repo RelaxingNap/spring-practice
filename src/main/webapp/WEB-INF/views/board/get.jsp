@@ -45,7 +45,7 @@
 			const replyId = $(this).attr("data-reply-id");
 			
 			if(confirm("댓글을 삭제하시겠습니까")){
-				$("#reply-delete-input1").val(replyId);
+				$("#reply-delete-input").val(replyId);
 				$("#reply-delete-form").submit();
 			}
 		});
@@ -105,22 +105,24 @@
 	<div class="container mt-3">
 		<div class="row">
 			<div class="col">
+				<h1>댓글 개</h1>
 				<ul class="list-group">
 					<c:forEach items="${replyList }" var="reply">
 						<li class="list-group-item">
 							<div id="replyDisplayContainer${reply.id }">
 								<div class="fw-bold">
 									<i class="fa-solid fa-comment"></i>
-									${reply.inserted }
+									${reply.inserted } ${reply.content }
+									<button class="reply-edit-toggle-button"
+										id="replyEditToggleButton${reply.id }"
+										data-reply-id="${reply.id }">
+										<i class="fa-solid fa-pen-to-square"></i>
+									</button>
+									<button class="reply-delete-button"
+										data-reply-id="${reply.id }">
+										<i class="fa-solid fa-trash-can"></i>
+									</button>
 								</div>
-								${reply.content }
-								<button class="reply-edit-toggle-button" id="replyEditToggleButton${reply.id }" 
-									data-reply-id="${reply.id }">
-									<i class="fa-solid fa-pen-to-square"></i>
-								</button>
-								<button class="reply-delete-button" data-reply-id="${reply.id }">
-									<i class="fa-solid fa-trash-can"></i>
-								</button>
 							</div>
 
 							<div id="replyEditFormContainer${reply.id }" style="display: none;">
@@ -143,7 +145,7 @@
 	<div class="d-none">
 		<form id="reply-delete-form" action="${appRoot }/reply/remove" method="post">
 			<input type="hidden" name="boardId" value="${board.id }" />
-			<input id="reply-delete-input1" type="text" name="id" />
+			<input id="reply-delete-input" type="text" name="id" />
 		</form>
 	</div>
 

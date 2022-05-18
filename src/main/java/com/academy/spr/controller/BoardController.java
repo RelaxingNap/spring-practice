@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,20 +31,36 @@ public class BoardController {
 	private ReplyService replyService;
 	
 	@RequestMapping("list")
-	public void listBoard(@RequestParam(name = "page", defaultValue = "1")int page, Model model) {
-		int rowPerPage = 5;
-		List<BoardDto> list = boardService.listBoard(page, rowPerPage);
-		int totalRecord = boardService.countBoard();
+	public void listBoard(@RequestParam(name = "page", defaultValue = "1")int page, 
+			@RequestParam(name = "title", required = false) String title, Model model) {
+		int rowPerPage = 0;
+		
+		if(title != null) {
+			rowPerPage = 5;
+		} else {
+			rowPerPage = 7;
+		}
+				
+		List<BoardDto> list = boardService.searchListBoard(page, rowPerPage, title);
+		int totalRecord = boardService.searchCountBoard(title);
+		
 		int endPage = (totalRecord - 1) / rowPerPage + 1;
 		
 		PageInfoDto pageInfo = new PageInfoDto();
 		pageInfo.setCurrentPage(page);
 		pageInfo.setEndPage(endPage);
 		
+		model.addAttribute("title", title);
 		model.addAttribute("boardList", list);
 		model.addAttribute("pageInfo", pageInfo);
-	}
 		
+	}
+	
+	@GetMapping("write")
+	public void writeBoard() {
+		
+	}
+	
 	@PostMapping("write")
 	public String writeBoard(BoardDto board) {
 		boolean success = boardService.addBoard(board);
@@ -79,24 +96,5 @@ public class BoardController {
 		
 		return "redirect:/board/list";
 	}
-	
-	/*@GetMapping("search")
-	public String searchBoard(@RequestParam(name = "page", defaultValue = "1")int page, @RequestParam(name = "title")String title, Model model) {
-		int rowPerPage = 5;
-		List<BoardDto> list = boardService.searchListBoard(page, rowPerPage, title);
-		int totalRecord = boardService.searchCountBoard(title);
 		
-		int endPage = (totalRecord - 1) / rowPerPage + 1;
-		
-		PageInfoDto pageInfo = new PageInfoDto();
-		pageInfo.setCurrentPage(page);
-		pageInfo.setEndPage(endPage);
-		
-		model.addAttribute("boardList", list);
-		model.addAttribute("pageInfo", pageInfo);
-		
-		return "redirect:/board/list";
-	}*/
-	
-	
 }

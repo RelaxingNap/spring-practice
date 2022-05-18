@@ -14,17 +14,7 @@ public class BoardService {
 
 	@Autowired
 	private BoardMapper boardMapper;
-	
-	public List<BoardDto> listBoard(int page, int rowPerPage) {
-		int from = (page - 1) * rowPerPage;
 		
-		return boardMapper.selectAllBoard(from, rowPerPage);
-	}
-
-	public int countBoard() {
-		return boardMapper.countBoard();
-	}
-
 	public boolean addBoard(BoardDto board) {
 		board.setInserted(LocalDateTime.now());
 		int cnt = boardMapper.insertBoard(board);
@@ -67,7 +57,7 @@ public class BoardService {
 		title = "%" + title + "%";
 		int from = (page - 1) * rowPerPage;
 		
-		return boardMapper.searchAllBoard(from, rowPerPage, title);
+		return boardMapper.selectSearchAllBoard(from, rowPerPage, title);
 	}
 
 }

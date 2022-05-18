@@ -37,13 +37,12 @@
 					<td>${board.inserted }</td>
 				</tr>
 			</c:forEach>
-
 		</tbody>
 	</table>
 	
 	<nav class="navbar navbar-light bg-light">
 		<div class="container-fluid justify-content-center">
-			<form class="d-flex" action="${appRoot }/board/search">
+			<form class="d-flex" action="${appRoot }/board/list">
 				<input class="form-control me-2" type="search" name="title" placeholder="Search"
 					aria-label="Search">
 				<button class="btn btn-outline-success" type="submit">Search</button>
