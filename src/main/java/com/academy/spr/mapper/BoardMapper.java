@@ -16,9 +16,9 @@ public interface BoardMapper {
 
 	int deleteBoard(int id);
 
-	int selectSearchCountBoard(String title); // 검색어 있는경우와 없는경우 상관없이 적용
+	int selectSearchCountBoard(String keyword); // 검색어 있는경우와 없는경우 상관없이 적용
 
 	List<BoardDto> selectSearchAllBoard(@Param("from")int from, 
 			@Param("rowPerPage")int rowPerPage, 
-			@Param("title")String title); // 검색어 있는경우와 없는경우 상관없이 적용
+			@Param("keyword")String keyword); // 검색어 있는경우와 없는경우 상관없이 적용
 }

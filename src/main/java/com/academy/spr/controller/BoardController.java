@@ -32,17 +32,17 @@ public class BoardController {
 	
 	@RequestMapping("list")
 	public void listBoard(@RequestParam(name = "page", defaultValue = "1")int page, 
-			@RequestParam(name = "title", required = false) String title, Model model) {
+			@RequestParam(name = "keyword", required = false) String keyword, Model model) {
 		int rowPerPage = 0;
 		
-		if(title != null) {
+		if(keyword != null) {
 			rowPerPage = 5;
 		} else {
 			rowPerPage = 7;
 		}
 				
-		List<BoardDto> list = boardService.searchListBoard(page, rowPerPage, title);
-		int totalRecord = boardService.searchCountBoard(title);
+		List<BoardDto> list = boardService.searchListBoard(page, rowPerPage, keyword);
+		int totalRecord = boardService.searchCountBoard(keyword);
 		
 		int endPage = (totalRecord - 1) / rowPerPage + 1;
 		
@@ -50,7 +50,7 @@ public class BoardController {
 		pageInfo.setCurrentPage(page);
 		pageInfo.setEndPage(endPage);
 		
-		model.addAttribute("title", title);
+		model.addAttribute("keyword", keyword);
 		model.addAttribute("boardList", list);
 		model.addAttribute("pageInfo", pageInfo);
 		

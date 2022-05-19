@@ -4,8 +4,8 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.academy.spr.mapper.ReplyMapper"> 
 	<insert id="insertReply">
-		INSERT INTO Reply(board_id, content, inserted)
-		VALUES (#{boardId}, #{content}, #{inserted})
+		INSERT INTO Reply(board_id, content)
+		VALUES (#{boardId}, #{content})
 	</insert>
 	
 	<select id="selectAllReply" resultType="com.academy.spr.domain.ReplyDto">
@@ -30,5 +30,5 @@
 		DELETE FROM Reply
 		WHERE board_id = #{boardId}
 	</delete>
-	
+			
 </mapper>

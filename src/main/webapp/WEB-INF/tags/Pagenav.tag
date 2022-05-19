@@ -6,8 +6,8 @@
 	<ul class="pagination justify-content-center">
 		<li class="page-item">
 			<c:url value="${pagePath }" var="prevLink">
-				<c:if test="${not empty title }">
-					<c:param name="title" value="${title }"></c:param>
+				<c:if test="${not empty keyword }">
+					<c:param name="keyword" value="${keyword }"></c:param>
 				</c:if>
 				<c:param name="page" value="${pageInfo.currentPage - 1 }"></c:param>
 			</c:url>
@@ -19,19 +19,19 @@
 		</li>
 		<c:forEach begin="${pageInfo.left }" end="${pageInfo.right }" var="pageNum">
 			<c:url value="${pagePath }" var="presentLink">
-				<c:if test="${not empty title }">
-					<c:param name="title" value="${title }"></c:param>
+				<c:if test="${not empty keyword }">
+					<c:param name="keyword" value="${keyword }"></c:param>
 				</c:if>
 				<c:param name="page" value="${pageNum }"></c:param>
 			</c:url>
-			<li class="page-item">
-				<a class="page-link ${pageInfo.currentPage == pageNum ? 'active' : '' }" href="${presentLink }">${pageNum }</a>
+			<li class="page-item ${pageInfo.currentPage == pageNum ? 'active' : '' }">
+				<a class="page-link" href="${presentLink }">${pageNum }</a>
 			</li>
 		</c:forEach>
 
 		<c:url value="${pagePath }" var="nextLink">
-			<c:if test="${not empty title }">
-				<c:param name="title" value="${title }"></c:param>
+			<c:if test="${not empty keyword }">
+				<c:param name="keyword" value="${keyword }"></c:param>
 			</c:if>
 			<c:param name="page" value="${pageInfo.currentPage + 1 }"></c:param>
 		</c:url>

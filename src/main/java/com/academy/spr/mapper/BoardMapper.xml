@@ -5,14 +5,15 @@
 <mapper namespace="com.academy.spr.mapper.BoardMapper"> 
 	
 	<insert id="insertBoard" useGeneratedKeys="true" keyColumn="id" keyProperty="id">
-		INSERT INTO Board (title, body, inserted)
-		VALUES (#{title}, #{content}, #{inserted})
+		INSERT INTO Board (title, body)
+		VALUES (#{title}, #{content})
 	</insert>
 	
 	<select id="selectBoard" resultType="com.academy.spr.domain.BoardDto">
-		SELECT id, title, body content, inserted
-		FROM Board 
-		WHERE id = #{id}
+		SELECT b.id, b.title, b.body content, b.inserted, COUNT(r.id) replyNum
+		FROM Board b LEFT JOIN Reply r ON b.id = r.board_id
+		WHERE b.id = #{id}
+		GROUP BY b.id
 	</select>
 	
 	<update id="updateBoard">
@@ -30,13 +31,13 @@
 	<select id="selectSearchCountBoard" resultType="int">
 		SELECT Count(b.id)
 		FROM Board b
-		WHERE b.title LIKE #{title}
+		WHERE b.title LIKE #{keyword} OR b.body LIKE #{keyword}
 	</select>
 	
 	<select id="selectSearchAllBoard" resultType="com.academy.spr.domain.BoardDto">
 		SELECT b.id, b.title, b.inserted, COUNT(r.id) replyNum
 		FROM Board b LEFT JOIN Reply r ON b.id = r.board_id
-		WHERE b.title LIKE #{title} 
+		WHERE b.title LIKE #{keyword} OR b.body LIKE #{keyword}
 		GROUP BY b.id
 		ORDER BY 1 DESC
 		LIMIT #{from}, #{rowPerPage}

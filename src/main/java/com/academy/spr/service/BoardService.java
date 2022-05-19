@@ -1,6 +1,5 @@
 package com.academy.spr.service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,7 @@ public class BoardService {
 	private BoardMapper boardMapper;
 		
 	public boolean addBoard(BoardDto board) {
-		board.setInserted(LocalDateTime.now());
+		
 		int cnt = boardMapper.insertBoard(board);
 		
 		return cnt == 1;
@@ -37,27 +36,27 @@ public class BoardService {
 		return cnt == 1;
 	}
 
-	public int searchCountBoard(String title) {
-		if(title == null) {
-			title = "";
+	public int searchCountBoard(String keyword) {
+		if(keyword == null) {
+			keyword = "";
 		}
 		
-		title.trim();
-		title = "%" + title + "%";
+		keyword.trim();
+		keyword = "%" + keyword + "%";
 		
-		return boardMapper.selectSearchCountBoard(title);
+		return boardMapper.selectSearchCountBoard(keyword);
 	}
 
-	public List<BoardDto> searchListBoard(int page, int rowPerPage, String title) {
-		if(title == null) {
-			title = "";
+	public List<BoardDto> searchListBoard(int page, int rowPerPage, String keyword) {
+		if(keyword == null) {
+			keyword = "";
 		}
 		
-		title.trim();
-		title = "%" + title + "%";
+		keyword.trim();
+		keyword = "%" + keyword + "%";
 		int from = (page - 1) * rowPerPage;
 		
-		return boardMapper.selectSearchAllBoard(from, rowPerPage, title);
+		return boardMapper.selectSearchAllBoard(from, rowPerPage, keyword);
 	}
 
 }

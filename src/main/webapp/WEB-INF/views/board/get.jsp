@@ -58,12 +58,17 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<sub:Navbar />
+
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<h1>${board.id }번게시물 <button id="edit-button" class="btn btn-secondary">
-						<i class="fa-solid fa-pen-to-square"></i></button></h1>
+				<h1>${board.id }번게시물
+					<button id="edit-button" class="btn btn-secondary">
+						<i class="fa-solid fa-pen-to-square"></i>
+					</button>
+				</h1>
 				<form action="${appRoot }/board/modify" id="form1" method="post">
 					<input type="hidden" name="id" value="${board.id }" />
 					<div class="mb-3">
@@ -87,15 +92,19 @@
 			</div>
 		</div>
 	</div>
-	
+
+
 	<div class="container mt-3">
 		<div class="row">
 			<div class="col">
+				<h2>댓글 ${board.replyNum }개</h2>
 				<form action="${appRoot }/reply/write" method="post">
 					<div class="input-group">
 						<input type="hidden" name="boardId" value="${board.id }" />
 						<input class="form-control" type="text" name="content" required />
-						<button class="btn btn-outline-secondary"><i class="fa-solid fa-comment dots"></i></button>
+						<button class="btn btn-outline-secondary">
+							<i class="fa-solid fa-comment dots"></i>
+						</button>
 					</div>
 				</form>
 			</div>
@@ -105,7 +114,6 @@
 	<div class="container mt-3">
 		<div class="row">
 			<div class="col">
-				<h1>댓글 개</h1>
 				<ul class="list-group">
 					<c:forEach items="${replyList }" var="reply">
 						<li class="list-group-item">
@@ -125,13 +133,17 @@
 								</div>
 							</div>
 
-							<div id="replyEditFormContainer${reply.id }" style="display: none;">
+							<div id="replyEditFormContainer${reply.id }"
+								style="display: none;">
 								<form action="${appRoot }/reply/modify" method="post">
 									<div class="input-group">
 										<input type="hidden" name="boardId" value="${board.id }" />
 										<input type="hidden" name="id" value="${reply.id }" />
-										<input class="form-control" type="text" name="content" value="${reply.content }" required />
-										<button class="btn btn-outline-secondary"><i class="fa-solid fa-comment dots"></i></button>
+										<input class="form-control" type="text" name="content"
+											value="${reply.content }" required />
+										<button class="btn btn-outline-secondary">
+											<i class="fa-solid fa-comment dots"></i>
+										</button>
 									</div>
 								</form>
 							</div>
@@ -141,9 +153,10 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div class="d-none">
-		<form id="reply-delete-form" action="${appRoot }/reply/remove" method="post">
+		<form id="reply-delete-form" action="${appRoot }/reply/remove"
+			method="post">
 			<input type="hidden" name="boardId" value="${board.id }" />
 			<input id="reply-delete-input" type="text" name="id" />
 		</form>
