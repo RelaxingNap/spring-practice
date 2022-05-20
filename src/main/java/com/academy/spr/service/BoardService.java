@@ -36,7 +36,7 @@ public class BoardService {
 		return cnt == 1;
 	}
 
-	public int searchCountBoard(String keyword) {
+	public int searchCountBoard(String type, String keyword) {
 		if(keyword == null) {
 			keyword = "";
 		}
@@ -44,10 +44,10 @@ public class BoardService {
 		keyword.trim();
 		keyword = "%" + keyword + "%";
 		
-		return boardMapper.selectSearchCountBoard(keyword);
+		return boardMapper.selectSearchCountBoard(type, keyword);
 	}
 
-	public List<BoardDto> searchListBoard(int page, int rowPerPage, String keyword) {
+	public List<BoardDto> searchListBoard(int page, int rowPerPage, String type, String keyword) {
 		if(keyword == null) {
 			keyword = "";
 		}
@@ -56,7 +56,7 @@ public class BoardService {
 		keyword = "%" + keyword + "%";
 		int from = (page - 1) * rowPerPage;
 		
-		return boardMapper.selectSearchAllBoard(from, rowPerPage, keyword);
+		return boardMapper.selectSearchAllBoard(from, rowPerPage, type, keyword);
 	}
 
 }
