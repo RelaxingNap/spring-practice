@@ -37,7 +37,10 @@
 	<select id="selectSearchAllBoard" resultType="com.academy.spr.domain.BoardDto">
 		SELECT b.id, b.title, b.inserted, COUNT(r.id) replyNum
 		FROM Board b LEFT JOIN Reply r ON b.id = r.board_id
-		WHERE b.title LIKE #{keyword} OR b.body LIKE #{keyword}
+		<if test="type != null">
+			WHERE b.title LIKE #{keyword} OR b.body LIKE #{keyword}
+		</if>
+				
 		GROUP BY b.id
 		ORDER BY 1 DESC
 		LIMIT #{from}, #{rowPerPage}

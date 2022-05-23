@@ -6,16 +6,16 @@
 	<div class="container-fluid">
 		<a class="navbar-brand" href="${appRoot }/board/list">게시판</a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-			data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"">
+			data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav">
 				<li class="nav-item">
-					<a class="nav-link" href="${appRoot }/board/list">Home</a>
+					<a class="nav-link ${pagePath == 'list' ? 'active' : '' }" href="${appRoot }/board/list">Home</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="${appRoot }/board/write">글쓰기</a>
+					<a class="nav-link ${pagePath == 'write' ? 'active' : '' }" href="${appRoot }/board/write">글쓰기</a>
 				</li>
 			</ul>
 		</div>
