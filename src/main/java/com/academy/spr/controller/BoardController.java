@@ -64,7 +64,7 @@ public class BoardController {
 	@PostMapping("write")
 	public String writeBoard(BoardDto board) {
 		boolean success = boardService.addBoard(board);
-			
+				
 		return "redirect:/board/" + board.getId();
 	}
 	
